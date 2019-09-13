@@ -22,6 +22,7 @@ public class CategoryServiceImplTest {
     public static final String NAME = "Test";
     @Mock
     CategoryRepository categoryRepository;
+
     CategoryServiceImpl categoryService;
 
     @Before
