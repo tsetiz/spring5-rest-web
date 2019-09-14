@@ -2,6 +2,7 @@ package guru.springframework.spring5restweb.services;
 
 import guru.springframework.spring5restweb.api.vi.mapper.CustomerMapper;
 import guru.springframework.spring5restweb.api.vi.model.CustomerDTO;
+import guru.springframework.spring5restweb.domain.Customer;
 import guru.springframework.spring5restweb.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +37,14 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(id)
                 .map(customerMapper::customerToCustomerDTO)
                 .orElseThrow(RuntimeException::new); //todo implement better exception handling
+    }
+
+    @Override
+    public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
+        Customer customer = customerMapper.customerDtoToCustomer(customerDTO);
+        Customer savedCustomer = customerRepository.save(customer);
+        CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
+        returnDto.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
+        return returnDto;
     }
 }
