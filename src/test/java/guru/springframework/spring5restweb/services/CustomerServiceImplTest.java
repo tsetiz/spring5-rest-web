@@ -82,4 +82,8 @@ public class CustomerServiceImplTest {
         assertEquals(customerDTO.getFirstName(), savedCustomer.getFirstName());
         assertEquals("/api/v1/customer/1", savedCustomer.getCustomerUrl());
     }
+
+    @Test
+    public void deleteCustomer() {
+    }
 }
