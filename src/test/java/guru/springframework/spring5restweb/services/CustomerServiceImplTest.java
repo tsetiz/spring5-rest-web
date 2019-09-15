@@ -7,7 +7,6 @@ import guru.springframework.spring5restweb.repositories.CustomerRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 public class CustomerServiceImplTest {
@@ -51,5 +51,35 @@ public class CustomerServiceImplTest {
         when(customerRepository.findById(1L)).thenReturn(Optional.of(customer1));
 
         assertEquals(Long.valueOf(1L), customerService.getCustomerById(1L).getId());
+    }
+
+    @Test
+    public void createNewCustomer() {
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFirstName("Kshitiz");
+
+        Customer customer = new Customer();
+        customer.setFirstName(customerDTO.getFirstName());
+        customer.setId(1L);
+
+        when(customerRepository.save(any(Customer.class))).thenReturn(customer);
+        CustomerDTO savedCustomer = customerService.createNewCustomer(customerDTO);
+        assertEquals(customerDTO.getFirstName(), savedCustomer.getFirstName());
+        assertEquals("/api/v1/customer/1", savedCustomer.getCustomerUrl());
+    }
+
+    @Test
+    public void updateCustomer() {
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFirstName("Kshitiz");
+
+        Customer customer = new Customer();
+        customer.setFirstName(customerDTO.getFirstName());
+        customer.setId(1L);
+
+        when(customerRepository.save(any(Customer.class))).thenReturn(customer);
+        CustomerDTO savedCustomer = customerService.updateCustomer(1L, customerDTO);
+        assertEquals(customerDTO.getFirstName(), savedCustomer.getFirstName());
+        assertEquals("/api/v1/customer/1", savedCustomer.getCustomerUrl());
     }
 }
