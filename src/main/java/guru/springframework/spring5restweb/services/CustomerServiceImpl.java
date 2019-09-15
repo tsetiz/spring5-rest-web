@@ -4,6 +4,7 @@ import guru.springframework.spring5restweb.api.vi.mapper.CustomerMapper;
 import guru.springframework.spring5restweb.api.vi.model.CustomerDTO;
 import guru.springframework.spring5restweb.controller.vi.CustomerController;
 import guru.springframework.spring5restweb.domain.Customer;
+import guru.springframework.spring5restweb.exceptions.ResourceNotFoundException;
 import guru.springframework.spring5restweb.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
                     customerDTO.setCustomerUrl(getCustomerUrl(customer.getId()));
                     return customerDTO;
                 })
-                .orElseThrow(RuntimeException::new); //todo implement better exception handling
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
             CustomerDTO dto = customerMapper.customerToCustomerDTO(customerRepository.save(customer));
             dto.setCustomerUrl(getCustomerUrl(id));
             return dto;
-        }).orElseThrow(RuntimeException::new); //todo implement better exception handling
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override

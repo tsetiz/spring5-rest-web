@@ -1,6 +1,7 @@
 package guru.springframework.spring5restweb.controller.vi;
 
 import guru.springframework.spring5restweb.api.vi.model.CategoryDTO;
+import guru.springframework.spring5restweb.controller.RestResponseEntityExceptionHandler;
 import guru.springframework.spring5restweb.services.CategoryService;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +38,9 @@ public class CategoryControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mock = MockMvcBuilders.standaloneSetup(categoryController).build();
+        mock = MockMvcBuilders.standaloneSetup(categoryController)
+                .setControllerAdvice(RestResponseEntityExceptionHandler.class)
+                .build();
     }
 
     @Test

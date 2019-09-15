@@ -2,7 +2,9 @@ package guru.springframework.spring5restweb.services;
 
 import guru.springframework.spring5restweb.api.vi.mapper.CustomerMapper;
 import guru.springframework.spring5restweb.api.vi.model.CustomerDTO;
+import guru.springframework.spring5restweb.controller.vi.CustomerController;
 import guru.springframework.spring5restweb.domain.Customer;
+import guru.springframework.spring5restweb.exceptions.ResourceNotFoundException;
 import guru.springframework.spring5restweb.repositories.CustomerRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +51,12 @@ public class CustomerServiceImplTest {
         customer1.setId(1L);
 
         when(customerRepository.findById(1L)).thenReturn(Optional.of(customer1));
+        assertEquals(Long.valueOf(1L), customerService.getCustomerById(1L).getId());
+    }
 
+    @Test(expected = ResourceNotFoundException.class)
+    public void testGetCustomerByIdNotFound() {
+        when(customerRepository.findById(1L)).thenReturn(Optional.empty());
         assertEquals(Long.valueOf(1L), customerService.getCustomerById(1L).getId());
     }
 
@@ -65,7 +72,7 @@ public class CustomerServiceImplTest {
         when(customerRepository.save(any(Customer.class))).thenReturn(customer);
         CustomerDTO savedCustomer = customerService.createNewCustomer(customerDTO);
         assertEquals(customerDTO.getFirstName(), savedCustomer.getFirstName());
-        assertEquals("/api/v1/customer/1", savedCustomer.getCustomerUrl());
+        assertEquals(CustomerController.BASE_URL + "/1", savedCustomer.getCustomerUrl());
     }
 
     @Test
@@ -80,7 +87,7 @@ public class CustomerServiceImplTest {
         when(customerRepository.save(any(Customer.class))).thenReturn(customer);
         CustomerDTO savedCustomer = customerService.updateCustomer(1L, customerDTO);
         assertEquals(customerDTO.getFirstName(), savedCustomer.getFirstName());
-        assertEquals("/api/v1/customer/1", savedCustomer.getCustomerUrl());
+        assertEquals(CustomerController.BASE_URL + "/1", savedCustomer.getCustomerUrl());
     }
 
     @Test
