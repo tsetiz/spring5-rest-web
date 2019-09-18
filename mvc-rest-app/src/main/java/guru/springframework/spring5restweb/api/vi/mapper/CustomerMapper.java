@@ -1,6 +1,6 @@
 package guru.springframework.spring5restweb.api.vi.mapper;
 
-import guru.springframework.spring5restweb.api.vi.model.CustomerDTO;
+import guru.springframework.model.CustomerDTO;
 import guru.springframework.spring5restweb.domain.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

@@ -1,6 +1,7 @@
 package guru.springframework.spring5restweb.controller.vi;
 
-import guru.springframework.spring5restweb.api.vi.model.CustomerDTO;
+
+import guru.springframework.model.CustomerDTO;
 import guru.springframework.spring5restweb.controller.RestResponseEntityExceptionHandler;
 import guru.springframework.spring5restweb.exceptions.ResourceNotFoundException;
 import guru.springframework.spring5restweb.services.CustomerService;
@@ -102,7 +103,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
                 .content(asJsonString(customer)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstName", equalTo("Fred")))
-                .andExpect(jsonPath("$.customer_url", equalTo(CustomerController.BASE_URL + "/1")));
+                .andExpect(jsonPath("$.customerUrl", equalTo(CustomerController.BASE_URL + "/1")));
     }
 
     @Test
@@ -127,6 +128,6 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
                 .content(asJsonString(customer)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", equalTo("Fred")))
-                .andExpect(jsonPath("$.customer_url", equalTo(CustomerController.BASE_URL + "/1")));
+                .andExpect(jsonPath("$.customerUrl", equalTo(CustomerController.BASE_URL + "/1")));
     }
 }

@@ -1,7 +1,7 @@
 package guru.springframework.spring5restweb.services;
 
+import guru.springframework.model.CustomerDTO;
 import guru.springframework.spring5restweb.api.vi.mapper.CustomerMapper;
-import guru.springframework.spring5restweb.api.vi.model.CustomerDTO;
 import guru.springframework.spring5restweb.bootstrap.Bootstrap;
 import guru.springframework.spring5restweb.domain.Customer;
 import guru.springframework.spring5restweb.repositories.CategoryRepository;
@@ -63,7 +63,7 @@ public class CustomerServiceImplItTest {
     }
 
 
-    private Long getCustomerIdValue(){
+    private Long getCustomerIdValue() {
         List<Customer> customers = customerRepository.findAll();
 
         System.out.println("Customers Found: " + customers.size());

@@ -1,7 +1,7 @@
 package guru.springframework.spring5restweb.services;
 
+import guru.springframework.model.CustomerDTO;
 import guru.springframework.spring5restweb.api.vi.mapper.CustomerMapper;
-import guru.springframework.spring5restweb.api.vi.model.CustomerDTO;
 import guru.springframework.spring5restweb.controller.vi.CustomerController;
 import guru.springframework.spring5restweb.domain.Customer;
 import guru.springframework.spring5restweb.exceptions.ResourceNotFoundException;

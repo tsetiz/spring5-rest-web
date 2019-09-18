@@ -1,6 +1,7 @@
 package guru.springframework.spring5restweb.services;
 
-import guru.springframework.spring5restweb.api.vi.model.CustomerDTO;
+
+import guru.springframework.model.CustomerDTO;
 
 import java.util.List;
 

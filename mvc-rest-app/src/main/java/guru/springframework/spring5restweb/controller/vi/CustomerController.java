@@ -1,7 +1,8 @@
 package guru.springframework.spring5restweb.controller.vi;
 
-import guru.springframework.spring5restweb.api.vi.model.CustomerDTO;
-import guru.springframework.spring5restweb.api.vi.model.CustomerListDTO;
+
+import guru.springframework.model.CustomerDTO;
+import guru.springframework.model.CustomerListDTO;
 import guru.springframework.spring5restweb.services.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +24,9 @@ public class CustomerController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public CustomerListDTO getAllCustomers() {
-        return new CustomerListDTO(customerService.getAllCustomers());
+        CustomerListDTO customerListDTO =  new CustomerListDTO();
+        customerListDTO.getCustomers().addAll(customerService.getAllCustomers());
+        return customerListDTO;
     }
 
     @GetMapping("/{id}")
